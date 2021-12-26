@@ -1,0 +1,41 @@
+var mixContainer1 = $('#mix-us-list-1');
+var mixContainer2 = $('#mix-us-list-2');
+
+
+//run the filter script on the first list
+mixitup(mixContainer1, {
+  animation: {
+    enable: false
+  }
+});
+
+//run the filter script on the secondlist
+mixitup(mixContainer2, {
+  animation: {
+    enable: false
+  }
+});
+
+
+// Creating dynamic elements classes from its categories:
+
+var mixClassArr = document.querySelectorAll('.mix .mix-meta-text');
+
+
+
+mixClassArr.forEach(function(elem) {
+  var text = elem.innerText || elem.innerContent;
+  if (!text) {
+    var text = 'empty';
+  }
+  var conv = text.replace(/[!\"#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '');
+  var className = conv.replace(/ /g, "-")
+    .toLowerCase()
+    .trim();
+  if (!isNaN(parseInt(className.charAt(0), 10))) {
+    className = ("_" + className);
+  }
+  elem.closest(".mix").classList.add(className);
+
+});
+
